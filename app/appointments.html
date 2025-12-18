@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments - FreshPath</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="../index.html" class="logo">
+                <img src="../images/freshpath_logo.jpg" alt="Logo" class="logo-img">
+                FreshPath
+            </a>
+            <div class="nav-links">
+                <a href="../index.html" style="font-size: 0.9rem;">Sign Out</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container app-container">
+        <div class="dashboard-grid">
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="my-plan.html" class="sidebar-link"><span>📋 My Plan</span></a></li>
+                    <li><a href="tracker.html" class="sidebar-link"><span>✅ Habit Tracker</span></a></li>
+                    <li><a href="progress.html" class="sidebar-link"><span>📊 Progress</span></a></li>
+                    <li><a href="appointments.html" class="sidebar-link active"><span>🩺 Appointments</span></a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main>
+                <div class="page-header">
+                    <h2>Consult a Specialist</h2>
+                    <p class="text-muted">Book a session with our certified psychologists.</p>
+                </div>
+
+                <div class="doctor-grid">
+
+                    <!-- Doctor 1 -->
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👩‍⚕️</div>
+                        <h3>Dr. Emily Rose</h3>
+                        <p class="doctor-specialty">Clinical Psychologist</p>
+                        <p class="doctor-desc">Specializes in anxiety and stress
+                            management through cognitive behavioral therapy.</p>
+                        <button class="btn btn-primary" onclick="openBooking('Dr. Emily Rose')">Book
+                            Session</button>
+                    </div>
+
+                    <!-- Doctor 2 -->
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👨‍⚕️</div>
+                        <h3>Dr. James Chen</h3>
+                        <p class="doctor-specialty">Behavioral Therapist</p>
+                        <p class="doctor-desc">Expert in habit formation and breaking
+                            negative behavioral patterns.</p>
+                        <button class="btn btn-primary" onclick="openBooking('Dr. James Chen')">Book
+                            Session</button>
+                    </div>
+
+                    <!-- Doctor 3 -->
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👩‍⚕️</div>
+                        <h3>Dr. Sarah Miller</h3>
+                        <p class="doctor-specialty">Wellness Coach</p>
+                        <p class="doctor-desc">Focuses on holistic wellness, meditation,
+                            and mindfulness practices.</p>
+                        <button class="btn btn-primary" onclick="openBooking('Dr. Sarah Miller')">Book
+                            Session</button>
+                    </div>
+
+                </div>
+
+                <!-- Booking Modal -->
+                <div id="bookingModal" class="modal-overlay">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Book Appointment</h3>
+                            <button onclick="closeModal()" class="modal-close-btn">&times;</button>
+                        </div>
+                        <div id="doctorNameDisplay" class="mb-2 text-primary font-bold"></div>
+
+                        <form onsubmit="handleBooking(event)">
+                            <div class="form-group">
+                                <label class="form-label">Patient Name</label>
+                                <input type="text" class="form-input" required placeholder="Your Full Name">
+                            </div>
+                            <div class="grid-2" style="gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label">Date</label>
+                                    <input type="date" id="bookingDate" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Time</label>
+                                    <select class="form-input">
+                                        <option>09:00 AM</option>
+                                        <option>10:00 AM</option>
+                                        <option>02:00 PM</option>
+                                        <option>04:00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Contact Number</label>
+                                <input type="tel" class="form-input" placeholder="+1 234 567 8900">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Reason for Visit</label>
+                                <textarea class="form-input" rows="2"
+                                    placeholder="Briefly describe your concern..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Confirm Booking</button>
+                        </form>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FreshPath. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

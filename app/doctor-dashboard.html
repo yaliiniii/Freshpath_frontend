@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - FreshPath</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+    <nav class="navbar border-bottom-secondary">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <img src="../images/freshpath_logo.jpg" alt="Logo" class="logo-img">
+                FreshPath <span class="specialist-brand"></span></a>
+            <div class="nav-links">
+                <a href="../index.html" class="btn-sm">Sign Out</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container app-container">
+        
+        <h2 class="mb-3">Welcome, Dr. Smith</h2>
+
+        <div class="grid-2 stat-card-grid">
+            <div class="card text-center">
+                <h3 class="stat-number text-secondary">12</h3>
+                <p class="text-muted">Total Bookings</p>
+            </div>
+            <div class="card text-center">
+                <h3 class="stat-number text-primary">4</h3>
+                <p class="text-muted">Today's Sessions</p>
+            </div>
+            <div class="card text-center">
+                <h3 class="stat-number text-accent">2</h3>
+                <p class="text-muted">Pending Requests</p>
+            </div>
+        </div>
+
+        
+        <h3 class="dashboard-subheader">Upcoming Appointments</h3>
+        <div class="card">
+            <table class="table-layout-fixed">
+                <thead>
+                    <tr class="table-header-row">
+                        <th class="table-cell-header">Patient Name</th>
+                        <th class="table-cell-header">Date & Time</th>
+                        <th class="table-cell-header">Reason</th>
+                        <th class="table-cell-header">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="appt-1" class="table-row-item">
+                        <td class="table-cell-name">Alice Johnson</td>
+                        <td class="p-4">Oct 24, 09:00 AM</td>
+                        <td class="table-cell-reason">Anxiety management follow-up</td>
+                        <td class="table-cell-actions">
+                            <button onclick="updateStatus('appt-1', 'accepted')"
+                                class="btn btn-action btn-accept">Accept</button>
+                            <button onclick="updateStatus('appt-1', 'rejected')"
+                                class="btn btn-action btn-reject">Reject</button>
+                            <button
+                                onclick="viewDetails('Alice Johnson', 'Anxiety management follow-up - experiencing higher stress levels at work.')"
+                                class="btn btn-outline btn-details">Details</button>
+                        </td>
+                    </tr>
+                    <tr id="appt-2" class="table-row-item">
+                        <td class="table-cell-name">Michael Chen</td>
+                        <td class="p-4">Oct 24, 02:00 PM</td>
+                        <td class="table-cell-reason">New patient consultation</td>
+                        <td class="table-cell-actions">
+                            <button onclick="updateStatus('appt-2', 'accepted')"
+                                class="btn btn-action btn-accept">Accept</button>
+                            <button onclick="updateStatus('appt-2', 'rejected')"
+                                class="btn btn-action btn-reject">Reject</button>
+                            <button
+                                onclick="viewDetails('Michael Chen', 'New patient consultation. Referred by Dr. Adams. Wants to discuss sleep hygiene.')"
+                                class="btn btn-outline btn-details">Details</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+        <div id="detailsModal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Appointment Details</h3>
+                    <button onclick="closeModal()" class="modal-close-btn">&times;</button>
+                </div>
+                <div class="mb-3">
+                    <strong>Patient:</strong> <span id="modalPatient"></span>
+                </div>
+                <div>
+                    <strong>Full Reason / Notes:</strong>
+                    <p id="modalReason" class="modal-detail-note"></p>
+                </div>
+                <div class="text-right mt-4">
+                    <button onclick="closeModal()" class="btn btn-primary">Close</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </table>
+    </div>
+    </div>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FreshPath. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

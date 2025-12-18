@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join MindBloom - Registration</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="../index.html" class="logo">
+                <img src="../images/freshpath_logo.jpg" alt="Logo" class="logo-img">
+                FreshPath
+            </a>
+        </div>
+    </nav>
+
+    <div class="auth-container">
+        <div class="card auth-card">
+            <div class="auth-header">
+                <h2>Begin Your Journey</h2>
+                <p>Create your personal growth space</p>
+            </div>
+
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="fullname" class="form-input" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-input" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" placeholder="Create a strong password" required>
+                </div>
+
+                <!-- New Smoking Cessation Fields -->
+                <div class="form-group">
+                    <label class="form-label">Favorite Hobby / Activity</label>
+                    <input type="text" id="hobby" class="form-input" placeholder="e.g., Swimming, Drawing">
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Years Smoked</label>
+                        <input type="number" id="yearsSmoked" class="form-input" placeholder="e.g., 5">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cigarettes per Day</label>
+                        <input type="number" id="dailyCount" class="form-input" placeholder="e.g., 10">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Target Quit Date</label>
+                    <input type="date" id="quitDate" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Reason for Quitting</label>
+                    <textarea id="reason" class="form-input" rows="2" placeholder="My health, my family..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Triggers</label>
+                    <textarea id="triggers" class="form-input" rows="2" placeholder="Stress, After meals..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Create Account</button>
+            </form>
+
+            <div class="form-footer">
+                Already a member? <a href="user-login.html">Log in here</a>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</body>
+
+</html>

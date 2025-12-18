@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress - FreshPath</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="../index.html" class="logo">
+                <img src="../images/freshpath_logo.jpg" alt="Logo" class="logo-img">
+                FreshPath
+            </a>
+            <div class="nav-links">
+                <a href="../index.html" style="font-size: 0.9rem;">Sign Out</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container app-container">
+        <div class="dashboard-grid">
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="my-plan.html" class="sidebar-link"><span>📋 My Plan</span></a></li>
+                    <li><a href="tracker.html" class="sidebar-link"><span>✅ Habit Tracker</span></a></li>
+                    <li><a href="progress.html" class="sidebar-link active"><span>📊 Progress</span></a></li>
+                    <li><a href="appointments.html" class="sidebar-link"><span>🩺 Appointments</span></a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main>
+                <div class="page-header">
+                    <h2>Activity Log</h2>
+                    <p style="color: var(--color-text-muted);">Your daily consistency record</p>
+                </div>
+
+                <div class="card">
+                    <table class="w-full table-collapse">
+                        <thead>
+                            <tr class="border-b-2 text-left">
+                                <th class="p-4 text-primary">Date</th>
+                                <th class="p-4 text-muted">Habits Completed</th>
+                                <th class="p-4 text-muted">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="progressTableBody">
+                            <!-- Populated by JS -->
+                            <tr>
+                                <td colspan="3" class="p-4 text-center text-muted">Loading data...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card"
+                    style="margin-top: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">Keep it up!</h4>
+                        <p style="color: var(--color-text-muted);">Consistency is key to forming new habits.</p>
+                    </div>
+                    <div style="font-size: 2rem;">💪</div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    </div>
+    </div>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FreshPath. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

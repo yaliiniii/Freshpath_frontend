@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker - FreshPath</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="../index.html" class="logo">
+                <img src="../images/freshpath_logo.jpg" alt="Logo" class="logo-img">
+                FreshPath
+            </a>
+            <div class="nav-links">
+                <a href="../index.html" style="font-size: 0.9rem;">Sign Out</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container app-container">
+        <div class="dashboard-grid">
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="my-plan.html" class="sidebar-link"><span>📋 My Plan</span></a></li>
+                    <li><a href="tracker.html" class="sidebar-link active"><span>✅ Habit Tracker</span></a></li>
+                    <li><a href="progress.html" class="sidebar-link"><span>📊 Progress</span></a></li>
+                    <li><a href="appointments.html" class="sidebar-link"><span>🩺 Appointments</span></a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main>
+                <div class="page-header">
+                    <h2>Daily Tracker</h2>
+                    <span class="text-muted">Today, December 15th</span>
+                </div>
+
+                <!-- Add New Habit -->
+                <div class="card tracker-add-card">
+                    <input type="text" class="form-input input-invisible" placeholder="Add a new habit...">
+                    <button class="btn btn-primary btn-sm">+</button>
+                </div>
+
+                <div class="todo-list">
+                    <!-- Item 1 -->
+                    <div class="todo-item">
+                        <input type="checkbox" class="todo-checkbox">
+                        <div class="todo-text">Morning Meditation (10 mins)</div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="todo-item">
+                        <input type="checkbox" class="todo-checkbox">
+                        <div class="todo-text">Drink 8 glasses of water</div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="todo-item">
+                        <input type="checkbox" class="todo-checkbox">
+                        <div class="todo-text">Read 10 pages</div>
+                    </div>
+
+                    <!-- Item 4 (Completed State Demo) -->
+                    <div class="todo-item completed">
+                        <input type="checkbox" class="todo-checkbox" checked>
+                        <div class="todo-text">Morning Walk</div>
+                    </div>
+                </div>
+
+                <!-- Daily Journal Section -->
+                <div class="card mt-4">
+                    <div class="journal-header">
+                        <h3>Daily Journal</h3>
+                        <span class="text-muted font-size-sm">How are you feeling
+                            today?</span>
+                    </div>
+                    <textarea class="form-input textarea-journal" rows="6"
+                        placeholder="Dear Diary, today was..."></textarea>
+                    <div class="text-right mt-2">
+                        <button class="btn btn-primary" onclick="alert('Journal entry saved!')">Save Entry</button>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FreshPath. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
