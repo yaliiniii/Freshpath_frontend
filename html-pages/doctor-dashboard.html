@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="../css/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class="m-0 p-0 box-border bg-[#f5f9f6] text-[#0f3715] leading-[1.6] flex flex-col min-h-screen">
+    <nav class="bg-white py-4 sticky top-0 z-50 border-b border-[#0000000d]">
+        <div class="flex justify-between items-center px-5 mx-auto max-w-7xl">
+            <a href="../index.html" class="text-2xl font-extrabold flex items-center gap-2 text-[#0f3715]">
+                <img src="../assets/freshpath_logo.jpg" class="w-10 h-auto sm:w-12" alt="FreshPath Logo" />
+                FreshPath
+            </a>
+            <div class="hidden md:flex items-center">
+                <a class="bg-[#0f3715] text-white py-2.5 px-6 rounded-xl font-semibold text-sm transition-all hover:-translate-y-[2px]" href="../index.html">Sign Out</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="py-6 md:py-8 px-4 md:px-0 min-h-[calc(100vh-140px)] w-full max-w-[1200px] mx-auto box-border">
+        <h2 id="doctorWelcome" class="text-3xl font-bold text-[#0f3715] mb-6">Welcome, Doctor</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-2xl p-6 shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-[#0000000d]">
+                <p class="text-sm text-[#2c4c32] font-semibold mb-1">Total Bookings</p>
+                <p id="totalBookings" class="text-3xl font-bold text-[#0f3715]">0</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-[#0000000d]">
+                <p class="text-sm text-[#2c4c32] font-semibold mb-1">Today's Sessions</p>
+                <p id="todaysSessions" class="text-3xl font-bold text-[#0f3715]">0</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-[#0000000d]">
+                <p class="text-sm text-[#2c4c32] font-semibold mb-1">Pending Requests</p>
+                <p id="pendingRequests" class="text-3xl font-bold text-[#f0c040]">0</p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-[#0000000d]">
+            <h3 class="text-xl font-bold text-[#0f3715] mb-4">Patient Appointments</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+        <tr class="text-left border-2 border-[#c6eacb]">
+            <th class="p-4">Patient Name</th>
+            <th class="p-4">Date & Time</th>
+            <th class="p-4">Actions</th>
+        </tr>
+    </thead>
+    <tbody id="appointmentTableBody">
+       
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    <script src="../js/api-config.js"></script>
+    <script>
+
+        async function loadDashboardData() {
+            try {
+              
+                const doctorJson = localStorage.getItem('doctor');
+                const loggedInDoctor = doctorJson ? JSON.parse(doctorJson) : null;
+
+                if (loggedInDoctor) {
+                    document.getElementById('doctorWelcome').textContent = `Welcome, Dr. ${loggedInDoctor.name}`;
+                }
+
+                const resp = await fetch(`${API_BASE}/appointments/`);
+                let appointments = await resp.json();
+
+               
+                if (loggedInDoctor) {
+                    appointments = appointments.filter(app => app.doctor_name === loggedInDoctor.name);
+                }
+
+                document.getElementById('totalBookings').textContent = appointments.length;
+  
+                const today = new Date().toISOString().split('T')[0];
+                const todaysCount = appointments.filter(app => app.appointment_date === today && app.status !== 'Cancelled').length;
+                document.getElementById('todaysSessions').textContent = todaysCount;
+
+                const pendingCount = appointments.filter(app => app.status === 'Pending').length;
+                document.getElementById('pendingRequests').textContent = pendingCount;
+
+                const tableBody = document.getElementById('appointmentTableBody');
+                tableBody.innerHTML = '';
+
+                appointments.forEach(app => {
+                    const row = document.createElement('tr');
+                    row.className = 'border-b border-[#eee]';
+                    row.innerHTML = `
+                        <td class="p-4 font-bold">
+                            ${app.user_name || 'Anonymous Patient'}
+                            <div class="text-xs font-normal 
+                                ${app.status === 'Accepted' ? 'text-green-600' :
+                            (app.status === 'Rejected' ? 'text-red-500' :
+                                (app.status === 'Cancelled' ? 'text-gray-400 font-bold italic' : 'text-orange-500'))}">
+                                Status: ${app.status === 'Cancelled' ? 'CANCELLED BY PATIENT' : app.status}
+                            </div>
+                        </td>
+                        <td class="p-4 ${app.status === 'Cancelled' ? 'line-through opacity-50' : ''}">
+                            ${app.appointment_date} at ${app.appointment_time}
+                        </td>
+                        <td class="p-4 flex gap-2">
+                            ${app.status === 'Pending' ? `
+                                <button onclick="updateStatus(${app.id}, 'Accepted')" class="bg-[#C8E6C9] text-[#2E7D32] py-1.5 px-3 text-sm font-bold rounded-xl hover:bg-[#b8d6b9]">Accept</button>
+                                <button onclick="updateStatus(${app.id}, 'Rejected')" class="bg-[#FFEBEE] text-[#C62828] py-1.5 px-3 text-sm font-bold rounded-xl hover:bg-[#efdbde]">Reject</button>
+                            ` : (app.status === 'Cancelled' ? `
+                                <span class="text-gray-400 font-bold text-xs py-1.5 px-3 border border-gray-200 rounded-lg">CANCELED</span>
+                            ` : `
+                                <span class="${app.status === 'Accepted' ? 'text-green-600' : 'text-red-600'} font-bold text-sm py-1.5 px-3">
+                                    ${app.status === 'Accepted' ? '✓ Accepted' : '✗ Rejected'}
+                                </span>
+                            `)}
+                            <button onclick="deleteApp(${app.id})" class="text-gray-400 hover:text-red-600 p-1.5 ml-auto" title="Remove Record">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (err) {
+                console.error("Failed to load dashboard data", err);
+            }
+        }
+
+        async function deleteApp(id) {
+            if (confirm('Are you sure you want to cancel this appointment?')) {
+                await fetch(`${API_BASE}/appointments/${id}`, { method: 'DELETE' });
+                loadDashboardData();
+            }
+        }
+
+        async function updateStatus(id, newStatus) {
+            try {
+                if (newStatus === 'Rejected') {
+                
+                    if (!confirm('Reject and delete this appointment request?')) return;
+                    const response = await fetch(`${API_BASE}/appointments/${id}`, {
+                        method: 'DELETE'
+                    });
+                    if (response.ok) {
+                        loadDashboardData();
+                    } else {
+                        alert('Failed to reject appointment');
+                    }
+                } else {
+                 
+                    const response = await fetch(`${API_BASE}/appointments/${id}/status?status=${newStatus}`, {
+                        method: 'PATCH'
+                    });
+                    if (response.ok) {
+                        loadDashboardData();
+                    } else {
+                        alert('Failed to update status');
+                    }
+                }
+            } catch (err) {
+                console.error('Error updating status:', err);
+            }
+        }
+
+        loadDashboardData();
+    </script>
+    <footer class="mt-auto text-center bg-[#0f3715] py-8 px-0 text-white">
+        <div class="py-0 px-5 my-0 mx-auto max-w-7xl">
+            <p>2026 Fresh Path. All rights reserved.</p>
+        </div>
+    </footer>
+    </body>
+
+</html>
